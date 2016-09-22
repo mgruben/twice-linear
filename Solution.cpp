@@ -11,17 +11,20 @@ public:
         set<int> s;
         s.insert(1);
         while (s.size() < n) {
+            set<int> tmp = s;
             for (int i: s) {
-                s.insert(2*i + 1);
-                s.insert(3*i + 1);
+                tmp.insert(2*i + 1);
+                tmp.insert(3*i + 1);
             }
+            s = tmp;
         }
+        return -1;
     }
 };
 
 
 int main() {
     DoubleLinear dl;
-    cout << dl.dblLinear(0) << endl;
+    cout << dl.dblLinear(10) << endl;
     return 0;
 }
