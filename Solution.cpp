@@ -1,32 +1,76 @@
 #include <iostream>
 #include <set>
 #include <vector>
+#include <deque>
 #include <algorithm>
 #include <math.h>
 
 using namespace std;
 
+string toString(set<int> s) {
+    if (s.size() == 0) return "()";
+    string ans = "(";
+    for (int i: s) {
+        ans += to_string(i);
+        ans += ", ";
+    }
+    ans = ans.substr(0, ans.length() - 2);
+    return ans + ")";
+}
+
+string toString(deque<int> d) {
+    if (d.size() == 0) return "[]";
+    string ans = "[";
+    for (int i: d) {
+        ans += to_string(i);
+        ans += ", ";
+    }
+    return ans.substr(0, ans.length() - 2) + "]";
+}
+
 class DoubleLinear
 {
+private:
+    static int lowerLimit(int n) {
+        int numIters = ceil(log2(n) + 1);
+        int ans = 1;
+        for (int i = 0; i < numIters; i++) {
+            ans = 2*ans + 1;
+        }
+        return ans;
+    };
+
 public:
     static int dblLinear(int n) {
         if (n == 0) return 1;
-        set<int> s;
-        s.insert(1);
-        cout << "Added 1 to s" << endl;
-        cout << "s.size() = " << s.size() << endl;
-        for (int i = 0; i < ceil(log2(n) + 1); i++) {
-            set<int> copy = s;
-            for (int i: copy) {
-                s.insert(2*i + 1);
-                cout << "Added " << 2*i + 1 << " to s" << endl;
-                cout << "s.size() = " << s.size() << endl;
-                s.insert(3*i + 1);
-                cout << "Added " << 3*i + 1 << " to s" << endl;
-                cout << "s.size() = " << s.size() << endl;
+        deque<int> toEval;
+        set<int> evaled;
+        toEval.push_back(1);
+        cout << "Added 1 to toEval" << endl;
+        cout << "toEval.size() = " << toEval.size() << endl;
+        cout << endl;
+        int lim = lowerLimit(n);
+        cout << lim << endl;
+        while(evaled.size() < 2*n) {
+            deque<int> evaling(toEval);
+            sort(evaling.begin(), evaling.end());
+            int size = toEval.size();
+            cout << "size of evaled: " << evaled.size() << endl;
+            toEval.clear();
+            cout << "evaled contains: " << toString(evaled) << endl;
+            cout << "evaling contains " << toString(evaling) << endl;
+            for (int i = 0; i < size; i++) {
+                int num = evaling.front();
+                evaling.pop_front();
+                cout << "num being evaluated is " << num << endl;
+                toEval.push_back(2*num + 1);
+                toEval.push_back(3*num + 1);
+                evaled.insert(num);
+                cout << endl;
             }
         }
-        vector<int> v(s.begin(), s.end());
+        vector<int> v(evaled.begin(), evaled.end());
+        cout << v.size() << endl;
         return v[n];
     }
 };
@@ -34,6 +78,6 @@ public:
 
 int main() {
     DoubleLinear dl;
-    cout << dl.dblLinear(500) << endl;
+    cout << dl.dblLinear(30) << endl;
     return 0;
 }
