@@ -12,11 +12,10 @@ public:
         s.insert(1);
         while (s.size() < n) {
             set<int> tmp = s;
-            for (int i: s) {
-                tmp.insert(2*i + 1);
-                tmp.insert(3*i + 1);
+            for (int i: tmp) {
+                s.insert(2*i + 1);
+                s.insert(3*i + 1);
             }
-            s = tmp;
         }
         return -1;
     }
