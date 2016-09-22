@@ -2,6 +2,7 @@
 #include <set>
 #include <vector>
 #include <algorithm>
+#include <math.h>
 
 using namespace std;
 
@@ -14,7 +15,7 @@ public:
         s.insert(1);
         cout << "Added 1 to s" << endl;
         cout << "s.size() = " << s.size() << endl;
-        while (s.size() < n) {
+        for (int i = 0; i < ceil(log2(n) + 1); i++) {
             set<int> copy = s;
             for (int i: copy) {
                 s.insert(2*i + 1);
@@ -33,6 +34,6 @@ public:
 
 int main() {
     DoubleLinear dl;
-    cout << dl.dblLinear(10) << endl;
+    cout << dl.dblLinear(500) << endl;
     return 0;
 }
