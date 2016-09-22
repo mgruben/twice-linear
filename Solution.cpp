@@ -1,5 +1,7 @@
 #include <iostream>
-#include <set>
+#include <unordered_set>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -8,16 +10,24 @@ class DoubleLinear
 public:
     static int dblLinear(int n) {
         if (n == 0) return 1;
-        set<int> s;
+        unordered_set<int> s;
         s.insert(1);
+        cout << "Added 1 to s" << endl;
+        cout << "s.size() = " << s.size() << endl;
         while (s.size() < n) {
-            set<int> tmp = s;
-            for (int i: tmp) {
+            unordered_set<int> copy = s;
+            for (int i: copy) {
                 s.insert(2*i + 1);
+                cout << "Added " << 2*i + 1 << " to s" << endl;
+                cout << "s.size() = " << s.size() << endl;
                 s.insert(3*i + 1);
+                cout << "Added " << 3*i + 1 << " to s" << endl;
+                cout << "s.size() = " << s.size() << endl;
             }
         }
-        return -1;
+        vector<int> v(s.begin(), s.end());
+        sort(v.begin(), v.end());
+        return v[n];
     }
 };
 
