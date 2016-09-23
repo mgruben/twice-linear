@@ -52,9 +52,14 @@ public:
             set<long long unsigned int>::reverse_iterator i;
             for (i = evaled.rbegin(); i != evaled.rend();) {
                 if (*++i > toEval.front()) {
-                    overlap++;
+                    overlap++; // can we use lower_bound / upper_bound here?
+                    cout << overlap << endl;
                 }
-                else break;
+                else 
+                {
+                    cout << "breaking!" << endl;
+                    break;
+                }
             }
             invariantSize -= overlap;
         }
