@@ -19,6 +19,11 @@ string toString(priority_queue<long long unsigned int,
 class DoubleLinear
 {
 public:
+    /** Returns the nth entry in the set defined as follows:
+     * The set contains 1.
+     * For every entry in the set, (2*entry + 1) is also in the set.
+     * For every entry in the set, (3*entry + 1) is also in the set.
+     */
     static int dblLinear(int n) {
         
         // Handle malformed requests
