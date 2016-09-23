@@ -44,9 +44,8 @@ public:
         int invariantSize = toEval.size();
         int overlap = 1;
         while(invariantSize < n) {
-            int size = toEval.size();
             cout << "Begin insertion" << endl; // This is the slowest
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < invariantSize; i++) {
                 long long unsigned int num = toEval.top();
                 while (toEval.size() > 0 && num == toEval.top()) {
                     toEval.pop(); // Handle upcoming duplicates
@@ -64,6 +63,7 @@ public:
             invariantSize -= overlap;
             cout << *evaled.end() << endl;
         }
+        cout << "Begin vectorization" << endl;
         vector<int> v(evaled.begin(), evaled.end());
         return v[n];
     }
@@ -72,6 +72,6 @@ public:
 
 int main() {
     DoubleLinear dl;
-    cout << dl.dblLinear(200000) << endl;
+    cout << dl.dblLinear(300000) << endl;
     return 0;
 }
