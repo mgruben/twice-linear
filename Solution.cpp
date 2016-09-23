@@ -47,24 +47,15 @@ public:
                 evaled.insert(num);
             }
             sort(toEval.begin(), toEval.end());
-            deque<long long unsigned int>::iterator j = toEval.begin();
-            set<long long unsigned int>::iterator toErase;
-            toErase = evaled.find(*j);
-            while (toErase != evaled.end()) {
-                cout << "Removed duplicate " << toEval.front() << endl;
-                toEval.pop_front();
-                toErase = evaled.find(*++j);
-            }
-            set<long long unsigned int>::reverse_iterator i;
             invariantSize = evaled.size();
             overlap = 0;
+            set<long long unsigned int>::reverse_iterator i;
             for (i = evaled.rbegin(); i != evaled.rend();) {
                 if (*++i > toEval.front()) {
                     overlap++;
                 }
                 else break;
             }
-            cout << endl;
             invariantSize -= overlap;
         }
         vector<int> v(evaled.begin(), evaled.end());
