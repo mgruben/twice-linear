@@ -37,9 +37,9 @@ public:
         set<long long unsigned int> evaled;
         toEval.push_back(1);
         int invariantSize = toEval.size();
+        int overlap = 1;
         while(invariantSize < n) {
-            int size = invariantSize;
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < invariantSize; i++) {
                 long long unsigned int num = toEval.front();
                 toEval.pop_front();
                 toEval.push_back(2*num + 1);
@@ -51,18 +51,21 @@ public:
             set<long long unsigned int>::iterator toErase;
             toErase = evaled.find(*j);
             while (toErase != evaled.end()) {
+                cout << "Removed duplicate " << toEval.front() << endl;
                 toEval.pop_front();
                 toErase = evaled.find(*++j);
             }
             set<long long unsigned int>::reverse_iterator i;
             invariantSize = evaled.size();
-            for (i = evaled.rbegin(); i != evaled.rend(); ++i) {
-                if (*i > toEval.front()) {
-                    invariantSize--;
+            overlap = 0;
+            for (i = evaled.rbegin(); i != evaled.rend();) {
+                if (*++i > toEval.front()) {
+                    overlap++;
                 }
                 else break;
             }
-            cout << toEval.back() << endl;
+            cout << endl;
+            invariantSize -= overlap;
         }
         vector<int> v(evaled.begin(), evaled.end());
         return v[n];
@@ -72,6 +75,6 @@ public:
 
 int main() {
     DoubleLinear dl;
-    cout << dl.dblLinear(100000) << endl;
+    cout << dl.dblLinear(200000) << endl;
     return 0;
 }
