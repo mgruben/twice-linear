@@ -48,19 +48,13 @@ public:
             }
             sort(toEval.begin(), toEval.end());
             invariantSize = evaled.size();
-            overlap = 0;
-            set<long long unsigned int>::reverse_iterator i;
-            for (i = evaled.rbegin(); i != evaled.rend();) {
-                if (*++i > toEval.front()) {
-                    overlap++; // can we use lower_bound / upper_bound here?
-                    cout << overlap << endl;
-                }
-                else 
-                {
-                    cout << "breaking!" << endl;
-                    break;
-                }
-            }
+            set<long long unsigned int>::iterator i;
+            cout << "toEval front: " << toEval.front() << endl;
+            i = evaled.lower_bound(toEval.front());
+            cout << "lower bound: " << *i << endl;
+            overlap = distance(i, evaled.end());
+            cout << "overlap: " << overlap << endl;
+            
             invariantSize -= overlap;
         }
         vector<int> v(evaled.begin(), evaled.end());
