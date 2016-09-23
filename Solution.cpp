@@ -30,16 +30,6 @@ string toString(deque<int> d) {
 
 class DoubleLinear
 {
-private:
-    static int lowerLimit(int n) {
-        int numIters = ceil(log2(n) + 1);
-        int ans = 1;
-        for (int i = 0; i < numIters; i++) {
-            ans = 2*ans + 1;
-        }
-        return ans;
-    };
-
 public:
     static int dblLinear(int n) {
         if (n == 0) return 1;
@@ -49,21 +39,24 @@ public:
         cout << "Added 1 to toEval" << endl;
         cout << "toEval.size() = " << toEval.size() << endl;
         cout << endl;
-        int lim = lowerLimit(n);
-        cout << lim << endl;
         int adjustedSize = evaled.size();
         while(adjustedSize < n) { // "size" here needs to be up to
                                    // toEval.front(), not the whole size.
             deque<int> evaling(toEval);
             sort(evaling.begin(), evaling.end());
             int size = toEval.size();
+            cout << "size of evaled: " << evaled.size() << endl;
             toEval.clear();
+            cout << "evaled contains: " << toString(evaled) << endl;
+            cout << "evaling contains " << toString(evaling) << endl;
             for (int i = 0; i < size; i++) {
                 int num = evaling.front();
                 evaling.pop_front();
+                cout << "num being evaluated is " << num << endl;
                 toEval.push_back(2*num + 1);
                 toEval.push_back(3*num + 1);
                 evaled.insert(num);
+                cout << endl;
             }
             set<int>::reverse_iterator i;
             adjustedSize = evaled.size();
@@ -81,6 +74,6 @@ public:
 
 int main() {
     DoubleLinear dl;
-    cout << dl.dblLinear(67322) << endl;
+    cout << dl.dblLinear(30) << endl;
     return 0;
 }
