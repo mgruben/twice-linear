@@ -1,5 +1,10 @@
 # twice-linear
-Find the nth term of a set, beginning with 1, which increases in two linear directions.
+Find the nth term of a set which increases in two linear directions.
+
+The set is defined as follows:
+* The set contains 1.
+* For every entry in the set, (2*entry + 1) is also in the set.
+* For every entry in the set, (3*entry + 1) is also in the set.
 
 Specifically, for every entry in the set, `(2*entry + 1)` and `(3*entry + 1)` must also be in the set.
 
