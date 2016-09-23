@@ -45,28 +45,27 @@ public:
             deque<int> evaling(toEval);
             sort(evaling.begin(), evaling.end());
             int size = toEval.size();
-            cout << "size of evaled: " << evaled.size() << endl;
             toEval.clear();
-            cout << "evaled contains: " << toString(evaled) << endl;
-            cout << "evaling contains " << toString(evaling) << endl;
             for (int i = 0; i < size; i++) {
                 int num = evaling.front();
                 evaling.pop_front();
-                cout << "num being evaluated is " << num << endl;
                 toEval.push_back(2*num + 1);
                 toEval.push_back(3*num + 1);
                 evaled.insert(num);
-                cout << endl;
             }
             set<int>::reverse_iterator i;
             invariantSize = evaled.size();
+            cout << "evaled contains: " << toString(evaled) << endl;
+            cout << "toEval contains " << toString(toEval) << endl;
             for (i = evaled.rbegin(); i != evaled.rend(); ++i) {
-                if (*i > toEval.front()) invariantSize--;
+                if (*i > toEval.front()) {
+                    cout << *i << ">" << toEval.front() << endl;
+                    invariantSize--;
+                }
                 else break;
             }
         }
         vector<int> v(evaled.begin(), evaled.end());
-        cout << v.size() << endl;
         return v[n];
     }
 };
