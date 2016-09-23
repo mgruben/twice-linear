@@ -39,6 +39,7 @@ public:
         int invariantSize = toEval.size();
         int overlap = 1;
         while(invariantSize < n) {
+            cout << "Begin while" << endl;
             for (int i = 0; i < invariantSize; i++) {
                 long long unsigned int num = toEval.front();
                 toEval.pop_front();
@@ -46,12 +47,13 @@ public:
                 toEval.push_back(3*num + 1);
                 evaled.insert(num);
             }
-            sort(toEval.begin(), toEval.end());
+            cout << "Begin sort" << endl;
+            sort(toEval.begin(), toEval.end()); // sort is the slowest
             invariantSize = evaled.size();
             set<long long unsigned int>::iterator i;
             i = evaled.lower_bound(toEval.front());
+            cout << "Begin distance" << endl;
             overlap = distance(i, evaled.end());
-            
             invariantSize -= overlap;
         }
         vector<int> v(evaled.begin(), evaled.end());
