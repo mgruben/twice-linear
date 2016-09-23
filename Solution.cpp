@@ -51,22 +51,25 @@ public:
         cout << endl;
         int lim = lowerLimit(n);
         cout << lim << endl;
-        while(evaled.size() < 2*n) {
+        int adjustedSize = evaled.size();
+        while(adjustedSize < n) { // "size" here needs to be up to
+                                   // toEval.front(), not the whole size.
             deque<int> evaling(toEval);
             sort(evaling.begin(), evaling.end());
             int size = toEval.size();
-            cout << "size of evaled: " << evaled.size() << endl;
             toEval.clear();
-            cout << "evaled contains: " << toString(evaled) << endl;
-            cout << "evaling contains " << toString(evaling) << endl;
             for (int i = 0; i < size; i++) {
                 int num = evaling.front();
                 evaling.pop_front();
-                cout << "num being evaluated is " << num << endl;
                 toEval.push_back(2*num + 1);
                 toEval.push_back(3*num + 1);
                 evaled.insert(num);
-                cout << endl;
+            }
+            set<int>::reverse_iterator i;
+            adjustedSize = evaled.size();
+            for (i = evaled.rbegin(); i != evaled.rend(); ++i) {
+                if (*i > toEval.front()) adjustedSize--;
+                else break;
             }
         }
         vector<int> v(evaled.begin(), evaled.end());
@@ -78,6 +81,6 @@ public:
 
 int main() {
     DoubleLinear dl;
-    cout << dl.dblLinear(30) << endl;
+    cout << dl.dblLinear(67322) << endl;
     return 0;
 }
