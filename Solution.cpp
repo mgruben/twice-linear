@@ -42,18 +42,22 @@ public:
         int invariantSize = toEval.size();
         int overlap = 1;
         while(invariantSize < n) {
-            for (int i = 0; i < invariantSize; i++) {
+            cout << "Begin insertions" << endl;
+            int size = toEval.size();
+            for (int i = 0; i < size; i++) {
                 long long unsigned int num = toEval.top();
                 toEval.pop();
                 toEval.push(2*num + 1);
                 toEval.push(3*num + 1);
                 evaled.insert(num);
             }
+            cout << "Begin overlap counting" << endl;
             invariantSize = evaled.size();
             set<long long unsigned int>::iterator i;
             i = evaled.lower_bound(toEval.top());
             overlap = distance(i, evaled.end());
             invariantSize -= overlap;
+            cout << endl;
         }
         vector<int> v(evaled.begin(), evaled.end());
         return v[n];
@@ -63,6 +67,6 @@ public:
 
 int main() {
     DoubleLinear dl;
-    cout << dl.dblLinear(200000) << endl;
+    cout << dl.dblLinear(300000) << endl;
     return 0;
 }
