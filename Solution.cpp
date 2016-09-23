@@ -36,29 +36,21 @@ public:
         deque<long long unsigned int> toEval;
         set<long long unsigned int> evaled;
         toEval.push_back(1);
-        cout << "Added 1 to toEval" << endl;
-        cout << "toEval.size() = " << toEval.size() << endl;
-        cout << endl;
         int invariantSize = evaled.size();
         while(invariantSize < n) {
-            deque<long long unsigned int> evaling(toEval);
-            sort(evaling.begin(), evaling.end());
             int size = toEval.size();
-            toEval.clear();
             for (int i = 0; i < size; i++) {
-                long long unsigned int num = evaling.front();
-                evaling.pop_front();
+                long long unsigned int num = toEval.front();
+                toEval.pop_front();
                 toEval.push_back(2*num + 1);
                 toEval.push_back(3*num + 1);
                 evaled.insert(num);
             }
+            sort(toEval.begin(), toEval.end());
             set<long long unsigned int>::reverse_iterator i;
             invariantSize = evaled.size();
-            cout << "evaled contains: " << toString(evaled) << endl;
-            cout << "toEval contains " << toString(toEval) << endl;
             for (i = evaled.rbegin(); i != evaled.rend(); ++i) {
                 if (*i > toEval.front()) {
-                    cout << *i << ">" << toEval.front() << endl;
                     invariantSize--;
                 }
                 else break;
@@ -73,6 +65,6 @@ public:
 
 int main() {
     DoubleLinear dl;
-    cout << dl.dblLinear(30) << endl;
+    cout << dl.dblLinear(100000) << endl;
     return 0;
 }
