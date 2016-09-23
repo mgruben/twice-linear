@@ -28,6 +28,8 @@ public:
         
         // Handle malformed requests
         if (n <= 0) return 1;
+        
+        // priority_queue in ascending order
         priority_queue<long long unsigned int,
             vector<long long unsigned int>,
             greater<long long unsigned int>> q;
