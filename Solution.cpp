@@ -49,11 +49,8 @@ public:
             sort(toEval.begin(), toEval.end());
             invariantSize = evaled.size();
             set<long long unsigned int>::iterator i;
-            cout << "toEval front: " << toEval.front() << endl;
             i = evaled.lower_bound(toEval.front());
-            cout << "lower bound: " << *i << endl;
             overlap = distance(i, evaled.end());
-            cout << "overlap: " << overlap << endl;
             
             invariantSize -= overlap;
         }
