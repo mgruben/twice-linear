@@ -39,8 +39,8 @@ public:
         cout << "Added 1 to toEval" << endl;
         cout << "toEval.size() = " << toEval.size() << endl;
         cout << endl;
-        int adjustedSize = evaled.size();
-        while(adjustedSize < n) { // "size" here needs to be up to
+        int invariantSize = evaled.size();
+        while(invariantSize < n) { // "size" here needs to be up to
                                    // toEval.front(), not the whole size.
             deque<int> evaling(toEval);
             sort(evaling.begin(), evaling.end());
@@ -59,9 +59,9 @@ public:
                 cout << endl;
             }
             set<int>::reverse_iterator i;
-            adjustedSize = evaled.size();
+            invariantSize = evaled.size();
             for (i = evaled.rbegin(); i != evaled.rend(); ++i) {
-                if (*i > toEval.front()) adjustedSize--;
+                if (*i > toEval.front()) invariantSize--;
                 else break;
             }
         }
