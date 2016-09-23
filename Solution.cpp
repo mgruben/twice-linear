@@ -1,9 +1,5 @@
 #include <iostream>
-#include <set>
-#include <vector>
 #include <queue>
-#include <algorithm>
-#include <math.h>
 
 using namespace std;
 
@@ -29,7 +25,6 @@ public:
             vector<long long unsigned int>,
             greater<long long unsigned int>> q;
         q.push(1);
-        cout << "Begin insertion" << endl; // This is the slowest
         for (int i = 0; i < n; i++) {
             long long unsigned int num = q.top();
             while (!q.empty() && num == q.top()) {
