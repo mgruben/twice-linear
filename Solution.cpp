@@ -7,10 +7,10 @@
 
 using namespace std;
 
-string toString(set<int> s) {
+string toString(set<long long unsigned int> s) {
     if (s.size() == 0) return "()";
     string ans = "(";
-    for (int i: s) {
+    for (long long unsigned int i: s) {
         ans += to_string(i);
         ans += ", ";
     }
@@ -18,10 +18,10 @@ string toString(set<int> s) {
     return ans + ")";
 }
 
-string toString(deque<int> d) {
+string toString(deque<long long unsigned int> d) {
     if (d.size() == 0) return "[]";
     string ans = "[";
-    for (int i: d) {
+    for (long long unsigned int i: d) {
         ans += to_string(i);
         ans += ", ";
     }
