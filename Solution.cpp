@@ -45,6 +45,7 @@ public:
         int overlap = 1;
         while(invariantSize < n) {
             int size = toEval.size();
+            cout << "Begin insertion" << endl; // This is the slowest
             for (int i = 0; i < size; i++) {
                 long long unsigned int num = toEval.top();
                 while (toEval.size() > 0 && num == toEval.top()) {
@@ -55,11 +56,13 @@ public:
                 toEval.push(3*num + 1);
                 evaled.insert(num);
             }
+            cout << "Begin overlap count" << endl;
             invariantSize = evaled.size();
             set<long long unsigned int>::iterator i;
             i = evaled.lower_bound(toEval.top());
             overlap = distance(i, evaled.end());
             invariantSize -= overlap;
+            cout << *evaled.end() << endl;
         }
         vector<int> v(evaled.begin(), evaled.end());
         return v[n];
