@@ -47,6 +47,15 @@ public:
                 evaled.insert(num);
             }
             sort(toEval.begin(), toEval.end());
+            deque<long long unsigned int>::iterator j = toEval.begin();
+            set<long long unsigned int>::iterator toErase;
+            toErase = evaled.find(*j);
+            cout << toString(evaled) << endl;
+            while (toErase != evaled.end()) {
+                cout << "found " << *toErase << endl;
+                toEval.pop_front();
+                toErase = evaled.find(*++j);
+            }
             set<long long unsigned int>::reverse_iterator i;
             invariantSize = evaled.size();
             for (i = evaled.rbegin(); i != evaled.rend(); ++i) {
@@ -65,6 +74,6 @@ public:
 
 int main() {
     DoubleLinear dl;
-    cout << dl.dblLinear(100000) << endl;
+    cout << dl.dblLinear(30) << endl;
     return 0;
 }
